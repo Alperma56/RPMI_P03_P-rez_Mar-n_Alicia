@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class PlayerCard : MonoBehaviour
 {
-    
+    public AudioSource takeCardAS;
+    public AudioSource dropCardAS;
+    public GameObject combatSystem;
+
     void Start()
     {
         
@@ -26,6 +29,13 @@ public class PlayerCard : MonoBehaviour
     {
         //cambia la jerarquía de la carta arriba cuando le pulsas
         GetComponent<SpriteRenderer>().sortingLayerName = "Selected Cards";
+        GetComponent<BoxCollider2D>().enabled = true;
+
+        if (!takeCardAS.isPlaying)
+        {
+            takeCardAS.pitch = Random.Range(0.95f, 1.05f);
+            takeCardAS.Play();
+        }
 
     }
 
@@ -33,5 +43,25 @@ public class PlayerCard : MonoBehaviour
     {
         //cambia la jerarquía de la carta abajo cuando le pulsas
         GetComponent<SpriteRenderer>().sortingLayerName = "Default";
+        GetComponent<BoxCollider2D>().enabled = false;
+
+        if (!dropCardAS.isPlaying)
+        {
+            dropCardAS.pitch = Random.Range(0.95f, 1.05f);
+            dropCardAS.Play();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if (!collision.gameObject.GetComponent<EnemyCard>().inCombat)
+            {
+                GameObject cs = Instantiate(combatSystem, transform.position, Quaternion.identity); // cs de combat system
+                cs.GetComponent<CombatSystem>().playerCard = GetComponent<CardStats>();
+                cs.GetComponent<CombatSystem>().enemyCard = collision.gameObject.GetComponent<CardStats>();
+            }
+        }
     }
 }
