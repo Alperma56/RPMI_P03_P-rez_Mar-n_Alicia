@@ -3,24 +3,24 @@ using UnityEngine;
 public class CombatSystem : MonoBehaviour
 {
 
-    public CardStats playerCard;
-    public CardStats enemyCard;
+    public CardsStats playerCard;
+    public CardsStats enemyCard;
     public Transform playerPos;
     public Transform enemyPos;
 
-    void Start()
-    {
-        CardLocate();
+    //void Start()
+    //{
+    //    CardLocate();
 
-        if (playerCard.GetAttack() >= enemyCard.GetAttack())
-        {
-            StartCoroutine(AttackPlayer());
-        }
-        else
-        {
-            StartCoroutine(AttackEnemy());
-        }
-    }
+    //    if (playerCard.GetAttack() >= enemyCard.GetAttack())
+    //    {
+    //        StartCoroutine(AttackPlayer());
+    //    }
+    //    else
+    //    {
+    //        StartCoroutine(AttackEnemy());
+    //    }
+    //}
 
     private void CardLocate()
     {
@@ -31,15 +31,15 @@ public class CombatSystem : MonoBehaviour
         enemyCard.transform.localPosition = Vector3.zero;
     }
 
-    private IEnumerator AttackPlayer()
-    {
-        yield return new WaitForSeconds(1);
-        Destroy(enemyCard.gameObject);
-    }
+    //private IEnumerator AttackPlayer()
+    //{
+    //    yield return new WaitForSeconds(1);
+    //    Destroy(enemyCard.gameObject);
+    //}
 
-    private IEnumerator AttackEnemy()
-    {
-        yield return new WaitForSeconds(1);
-        Destroy(playerCard.gameObject);
-    }
+    //private IEnumerator AttackEnemy()
+    //{
+    //    yield return new WaitForSeconds(1);
+    //    Destroy(playerCard.gameObject);
+    //}
 }

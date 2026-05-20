@@ -19,7 +19,7 @@ public class PlayerCard : MonoBehaviour
     private void OnMouseDrag()
     {
         //No podemos hacer que vaya a la posición de la cámara porque lee también el eje z, por lo que hay que crear una variable Vector 3 y hacer lo siguiente
-        Vector3 newPosition = transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPosition.z = 0;
         transform.position = newPosition;
 
@@ -59,8 +59,8 @@ public class PlayerCard : MonoBehaviour
             if (!collision.gameObject.GetComponent<EnemyCard>().inCombat)
             {
                 GameObject cs = Instantiate(combatSystem, transform.position, Quaternion.identity); // cs de combat system
-                cs.GetComponent<CombatSystem>().playerCard = GetComponent<CardStats>();
-                cs.GetComponent<CombatSystem>().enemyCard = collision.gameObject.GetComponent<CardStats>();
+                cs.GetComponent<CombatSystem>().playerCard = GetComponent<CardsStats>();
+                cs.GetComponent<CombatSystem>().enemyCard = collision.gameObject.GetComponent<CardsStats>();
             }
         }
     }
